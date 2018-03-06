@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\comments;
 use Auth;
    /**
     *  Post controller 
@@ -76,7 +77,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('Post')->with('post', $post);
+      
+        return view('Post')->with(['post' => $post]);
     }
 
     /**
@@ -120,5 +122,10 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->delete();
         return redirect('/')->with('success', 'successfully deleted item');
+    }
+
+    public function getComments()
+    {
+     
     }
 }

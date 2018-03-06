@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameBlogTable extends Migration
+class CommentPostId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class RenameBlogTable extends Migration
      */
     public function up()
     {
-      Schema::rename('blogs', 'posts');
+       Schema::table('comments', function (Blueprint $table)
+       {
+            $table->integer('post_id');
+        }
+        );
     }
 
     /**
@@ -23,7 +27,10 @@ class RenameBlogTable extends Migration
      */
     public function down()
     {
-        Schema::drop('posts');
-        Schema::dropIfExists('posts');
+        Schema::table('comments', function (Blueprint $table)
+        {
+             $table->dropColumn('post_id');
+         }
+         );
     }
 }

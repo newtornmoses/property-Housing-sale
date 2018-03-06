@@ -33,6 +33,11 @@ class User extends Authenticatable
         return  $this->hasMany('App\Post');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\comments');
+    }
+
     public function online()
     {    
         return Cache::has('user_is_online'.$this->id);

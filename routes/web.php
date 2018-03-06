@@ -21,7 +21,7 @@ Route::post('/post', 'PostController@store')->name('post.post');
 Route::post('/update/{id}', 'PostController@update')->name('post.update');
 
 Route::post('/delete/{id}', 'PostController@destroy')->name('post.delete');
-
+Route::post('/comment/{id}', 'commentController@store')->name('post.comment');
 
 
 //users

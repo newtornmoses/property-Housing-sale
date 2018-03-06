@@ -58,6 +58,47 @@ body {
     color: teal;
 }
 
+.comment_row {
+    display: -webkit-inline-box;
+    width: 600px;
+}
+
+.singleComment {
+    display: -webkit-flex;
+    margin: 10px;
+    background: whitesmoke;
+    padding: 5px;
+    border-radius: 20px;
+    width: -moz-fit-content;
+}
+
+.user {
+    display: -webkit-inline-box;
+}
+
+.commentUser {
+    color: #0067ff;
+}
+
+.actualComment {
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+#comment {
+    border-radius: 20px;
+}
+
+.commentSection {
+    list-style: none;
+}
+
+.Replycontrols {
+    display: -webkit-inline-box;
+    margin: -25px 40px -6px 40px;
+    font-size: 12px;
+}
+
 .sidebar li i {
     color: #09f;
     font-size: 18px;
