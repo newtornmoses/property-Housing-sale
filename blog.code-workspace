@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "E:\\php projects\\shopping-cart\\public\\images"
+		}
+	],
+	"settings": {
+		"svn.ignoreMissingSvnWarning": true
+	}
+}
