@@ -31,9 +31,20 @@
 
         // get userProfile
         public function Userprofile()
-            {$userid = auth()->user()->id;
-                $user = User::find($userid);
-                return view('Userprofile')->with('posts', $user->posts);
+            {
+                $userArray = array();
+                $userid = auth()->user()->id;
+                $user = Auth::user()->posts();
+                foreach(Auth::user()->posts() as $post):
+                array_push($userArray, $post);
+                endforeach;
+            //   usort($userArray, function ($a, $b ) {
+            //       return $a->id < $b->id;
+            //     });
+
+         
+               dd( Auth::user()->posts);
+                //return view('Userprofile')->with('posts', $userArray);
             }
 
             //get userprofile by id
