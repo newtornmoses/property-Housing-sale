@@ -15,7 +15,14 @@ class commentController extends Controller
      */
     public function index()
     {
-       
+       $comment = comments::all();
+
+       return $comment;
+    }
+
+    public function _construct()
+    {
+
     }
 
     /**
@@ -47,8 +54,10 @@ class commentController extends Controller
         $comment->comment=$request->input('comment');
         $comment->user_id =Auth::user()->id;
         $comment->post_id =$post->id;
-        
+        $comment->reply_id=0;
         $comment->save();
+
+    
         return redirect()->back();
     }
 
