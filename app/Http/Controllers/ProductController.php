@@ -14,17 +14,18 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $products =  Product::all();
+      $products =  Product::orderBy('title','asc')->paginate();
+
 
        return view('shop')->with('products',$products);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * filter by price.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function filterPrice()
     {
         //
     }
@@ -62,9 +63,77 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $product = Product::where('slug', $slug)->first();
+
+       
+        $mightAlsoLike =  Product::inRandomOrder()->take(6)->get();
+ 
+        return view('product')->with(['product'=> $product, 'mightAlsoLike' => $mightAlsoLike]);
+    }
+
+
+
+    public function getbyPrice(Request $request)
+    {
+       $price1 = $request->input('from');
+       $price2 = $request->input('to');
+       
+   $products = Product::where('price', '>=', $price1)
+                    ->where('price', '<=', $price2 )
+                    ->paginate();
+   return   view('shop')->with('products', $products);
+    }
+
+//    get items btn 0 -50
+    public function getbyFixedPrice()
+    {
+        $price1 =0;
+        $price2 =50;
+   $products = Product::where('price', '>=', $price1)
+                    ->where('price', '<=', $price2 )
+                    ->orderBy('title', 'asc')
+                    ->paginate();
+   return   view('shop')->with('products', $products);
+    }
+
+
+    //    get items btn 50 -100
+    public function getbyFixedPrice2()
+    {
+        $price1 =50;
+        $price2 =100;
+   $products = Product::where('price', '>=', $price1)
+                    ->where('price', '<=', $price2 )
+                    ->orderBy('title', 'asc')
+                    ->paginate();
+   return   view('shop')->with('products', $products);
+    }
+
+    //    get items btn 100 -200
+    public function getbyFixedPrice3()
+    {
+        $price1 =100;
+        $price2 =200;
+   $products = Product::where('price', '>=', $price1)
+                    ->where('price', '<=', $price2 )
+                    ->orderBy('title', 'asc')
+                    ->paginate();
+   return   view('shop')->with('products', $products);
+    }
+
+
+    //    get items btn 200 -500
+    public function getbyFixedPrice4()
+    {
+        $price1 =200;
+        $price2 =500;
+   $products = Product::where('price', '>=', $price1)
+                    ->where('price', '<=', $price2 )
+                    ->orderBy('title', 'asc')
+                    ->paginate();
+   return   view('shop')->with('products', $products);
     }
 
     /**

@@ -1,0 +1,224 @@
+body {
+    box-sizing: border-box;
+    margin-top: -40px;
+}
+
+.brandTile {
+    color: white;
+}
+
+.text-center.heading {
+    position: relative;
+    top: 40%;
+    color: white;
+    font-size: 69px;
+}
+
+.navbar-brand {
+    display: -webkit-inline-box;
+    display: -moz-inline-box;
+    display: -ms-inline-box;
+    display: inline-box;
+}
+
+.brandName {
+    margin-left: 150px;
+    transform: scale(0);
+}
+
+.pull-right.cart {
+    margin: 20px 10px 0px 20px;
+    color: #ff0c;
+    font-size: px;
+}
+
+.brandName_show {
+    margin-left: 150px;
+    display: block;
+    transform: scale(1.5);
+    transition: all 2s ease-in-out;
+}
+
+.headingFollow {
+    position: relative;
+    top: 45%;
+    left: 45%;
+    color: white;
+    font-size: 16px;
+}
+
+.banner::before {
+    position: absolute;
+    content: '';
+    height: 100vh;
+    width: 100%;
+    background: #00514c66;
+}
+
+.navbar-inverse {
+    background-color: #22222280;
+    border-color: #a2fce565;
+}
+
+.navbar-reverse {
+    background-color: #222222;
+}
+
+.btn.btn-default.pull-right {
+    background: unset;
+    color: white;
+    margin: 20px 10px 2px auto;
+    padding: 7px 50px;
+}
+
+.btn.btn-default.pull-right:hover {
+    background: #468285b3;
+}
+
+.banner {
+    background-image: url('../images/Christia-Bella-Men-Wedding-shoe.jpg');
+    background-attachment: fixed;
+    background-size: contain;
+    background-position: center;
+    height: 100vh;
+}
+
+.shopImage img {
+    height: 200px;
+    width: auto;
+}
+
+.shop {
+    text-transform: capitalize;
+    width: 300px;
+}
+
+.categoryAndBrand {
+    position: sticky
+}
+
+.panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #212426e6;
+    border-color: #eee0;
+}
+
+.panel-primary {
+    border-color: #c2c2c3;
+}
+
+.productDetails>.list-group-item {
+    background: #890c2be6;
+    color: whitesmoke;
+    height: auto;
+}
+
+.productDetails>.list-group-item:hover {
+    background: #890c2be6;
+    color: whitesmoke;
+}
+
+.list-group-item {
+    background: #890c2be6;
+    color: whitesmoke;
+}
+
+.list-group-item {
+    height: 60px;
+    padding: 10px;
+}
+
+.list-group-item>.fa {
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    background: #a23d4b;
+    border: 1px solid #c5cac91a;
+    padding: 7px;
+}
+
+.list-group-item:hover {
+    background: rgb(56, 56, 126);
+    background: #d1b70ccc;
+    color: #393939;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    margin-top: 20px;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.col-md-8.productsSearch {
+    background: whitesmoke;
+    height: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 40px;
+    border: 1px solid #baacba80;
+    border-radius: 20px 2px;
+    display: -webkit-inline-box;
+    display: -moz-inline-box;
+    display: inline-box;
+    display: -ms-inline-box;
+}
+
+.searchbtn {
+    margin: 2px;
+    height: 30px;
+    background: #0fb5e780;
+    color: #fff;
+    border: navy;
+}
+
+.searchForm {
+    display: -webkit-inline-box;
+    display: -moz-inline-box;
+    display: inline-box;
+    display: -ms-inline-box;
+    margin: -80px 30px 12px 290px;
+}
+
+.list-group-item:hover i {
+    background: #d1b70ccc;
+    color: #393939;
+    transform: rotateZ(70deg);
+    transition: all .4s ease-in;
+}
+
+.MightAlsoLike img {
+    height: 100px;
+}
+
+.MightAlsoLike.panel-default>.panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    height: 80px;
+    text-transform: capitalize;
+}
+
+.product>.panel-heading {
+    text-transform: capitalize;
+}
+
+.product img {
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
+    width: -webkit-Available;
+}
+
+.product img:hover {
+    cursor: zoom-in
+}
+
+.panel.panel-default.col-md-4.product {
+    width: 600px;
+}
