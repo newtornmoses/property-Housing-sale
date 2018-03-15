@@ -12,8 +12,13 @@
 */
 
 Route::get('/', 'ProductController@index')->name('shop.home') ;
+ Route::get('/cart', 'ProductController@getcart')->name('shop.getcart');
+Route::post('/cart', 'ProductController@addTocart')->name('shop.cart');
 
-Route::get('/{slug}', 'ProductController@show')->name('product.show') ;
+
+Route::delete('/cart/delete/{id}', 'ProductController@removeCart')->name('shop.delete');
+Route::post('/cartDecrease', 'ProductController@removeOnecart')->name('shop.cartDecrease');
+Route::get('/{slug}', 'ProductController@show')->name('product.show');
 
 
 
@@ -22,8 +27,8 @@ Route::get('/sort/fixedPrice2', 'ProductController@getbyFixedPrice2')->name('pro
 Route::get('/sort/fixedPrice3', 'ProductController@getbyFixedPrice3')->name('product.priceFixed3') ;
 Route::get('/sort/fixedPrice4', 'ProductController@getbyFixedPrice4')->name('product.priceFixed4') ;
 
+Route::post('/filter', 'ProductController@getbyPrice')->name('product.price');
 
-Route::post('/sort/manualFilter', 'ProductController@getbyPrice')->name('product.price') ;
 
 
 

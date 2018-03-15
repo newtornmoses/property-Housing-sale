@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Product;
+use Illuminate\Http\Request;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $products =  Product::orderBy('title','asc')->paginate();
+      $products =  Product::orderBy('title','asc')
+                    ->paginate();
 
 
        return view('shop')->with('products',$products);
@@ -68,7 +70,9 @@ class ProductController extends Controller
         $product = Product::where('slug', $slug)->first();
 
        
-        $mightAlsoLike =  Product::inRandomOrder()->take(6)->get();
+        $mightAlsoLike =  Product::where('slug','!=', $slug)
+                             ->inRandomOrder()
+                             ->take(6)->get();
  
         return view('product')->with(['product'=> $product, 'mightAlsoLike' => $mightAlsoLike]);
     }
@@ -83,6 +87,11 @@ class ProductController extends Controller
    $products = Product::where('price', '>=', $price1)
                     ->where('price', '<=', $price2 )
                     ->paginate();
+                    session()->flash('price1' ,$price1 );
+                    session()->flash('price2' ,$price2 );
+                    
+                  
+                    
    return   view('shop')->with('products', $products);
     }
 
@@ -134,6 +143,59 @@ class ProductController extends Controller
                     ->orderBy('title', 'asc')
                     ->paginate();
    return   view('shop')->with('products', $products);
+    }
+
+    //getcart
+
+    public function getcart()
+    {
+        return view('cart');
+    }
+
+    // add to cart
+
+    public function addTocart(Request $request)
+    {
+    
+                   
+        Cart::add($request->id,$request->name,1, $request->price)
+              ->associate('App\Product');
+
+       
+        session()->flash('success', 'successfully added new product');
+        
+
+              return view('cart');
+    }
+
+
+    // remove one from  cart
+
+    public function removeOnecart(Request $request)
+    {
+               
+        $cart =Cart::add($request->id,$request->name,-1, $request->price)
+              ->associate('App\Product');
+
+              //check for qty equal or lower than zero
+              if($cart->qty <=0){
+                  Cart::remove($cart->rowId);
+              }
+       
+        session()->flash('success', 'successfully deleted item');
+        
+
+              return view('cart');
+    }
+
+
+    //delete from cart
+
+    public function removeCart($id)
+    {
+        Cart::remove($id);
+        session()->flash('success', 'youve successfully deleted the item');
+        return redirect()->back();
     }
 
     /**

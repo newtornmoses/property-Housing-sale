@@ -1,6 +1,7 @@
 body {
     box-sizing: border-box;
     margin-top: -40px;
+    overflow-x: hidden;
 }
 
 .brandTile {
@@ -30,6 +31,32 @@ body {
     margin: 20px 10px 0px 20px;
     color: #ff0c;
     font-size: px;
+}
+
+.btn-default.homebtn {
+    color: #fff;
+    /* background-color: #3a5957;
+    /* border-color: #d5d5d54d; */
+    /* background-color: #10829999; */
+    background-color: #10829900;
+    border-color: #d5d5d500;
+    border-bottom: 1px solid yellowgreen;
+    margin-left: 10px;
+}
+
+.btn-default.homebtn:active {
+    color: #fff;
+    /* background-color: #3a5957;
+    /* border-color: #d5d5d54d; */
+    /* background-color: #10829999; */
+    background-color: #10829942;
+    border-color: #d5d5d500;
+    border-bottom: 1px solid yellowgreen;
+    margin-left: 10px;
+}
+
+.btn-default.homebtn:hover {
+    border-bottom: 1px solid rgba(153, 205, 50, 0.096);
 }
 
 .brandName_show {
@@ -163,10 +190,10 @@ a:hover {
     padding-bottom: 40px;
     border: 1px solid #baacba80;
     border-radius: 20px 2px;
-    display: -webkit-inline-box;
+    /* display: -webkit-inline-box;
     display: -moz-inline-box;
     display: inline-box;
-    display: -ms-inline-box;
+    display: -ms-inline-box; */
 }
 
 .searchbtn {
@@ -182,7 +209,10 @@ a:hover {
     display: -moz-inline-box;
     display: inline-box;
     display: -ms-inline-box;
-    margin: -80px 30px 12px 290px;
+    marin: -80px 30px 12px 290px;
+    position: relative;
+    left: 440px;
+    top: -58px;
 }
 
 .list-group-item:hover i {
@@ -221,4 +251,44 @@ a:hover {
 
 .panel.panel-default.col-md-4.product {
     width: 600px;
+}
+
+.table.table-hover.table-stripped {}
+
+.cart {
+    margin-top: 120px;
+}
+
+.cartHeading {
+    text-decoration: underline;
+}
+
+.pull-right.totalPrice {
+    background: #e6e6e6;
+    padding: 10px;
+    border: 1px solid #97e2db66;
+}
+
+.increaseDecreaseForms {
+    display: -webkit-inline-box;
+    display: -moz-inline-box;
+    display: -ms-inline-box;
+}
+
+.btn-success.increment {
+    color: #fff;
+    background-color: #055961;
+    border-color: #364e3600;
+}
+
+.btn-warning.decrement {
+    color: #fff;
+    background-color: #06c4ba;
+    border-color: #dfdfdf00;
+}
+
+.btn-danger.remove {
+    color: #fff;
+    background-color: #f05753;
+    border-color: #9f9f9f00;
 }

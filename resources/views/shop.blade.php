@@ -16,10 +16,7 @@
         <h3 class="well text-center"> WELCOME TO VAXON  OLINE SHOP</h3>
 </div>
 
- {{--  category sorting  --}}
-
-
-     
+ {{--  category section  --}}   
  <div class="categoryAndBrand col-md-3">
      <h4 class="text-center">Filter & Sort</h4>
         <div class="panel panel-primary">
@@ -73,16 +70,17 @@
                 <div class="panel-body">
 
                     <h4 class="text-center">Manual Filter</h4>
+                    
           
                     <form action="{{route('product.price')}}" method="post">
                         <div class="form-group">
                                 <label for="From">From</label>
-                                <input type="number" name="from" class="form-control" id="from" placeholder="e.g $50" value="">
+                                <input type="number" name="from" class="form-control" id="from" placeholder="e.g $50" value="{{session('price1')? session('price1'): ''}}" required>
                         </div>
 
                         <div class="form-group">
                                 <label for="To">To</label>
-                                <input type="number" name="to" class="form-control" id="to" placeholder="e.g $200">
+                                <input type="number" name="to" class="form-control" id="to" placeholder="e.g $200" value="{{session('price2')? session('price2'): ''}}" required>
                         </div>
 
 
@@ -134,16 +132,23 @@
 
 {{--  search pannel  --}}
  <div class="col-md-8 productsSearch">
-        {{ $products->links() }}
+    @if($products instanceof \Illuminate\Pagination\LengthAwarePaginator )
 
-        <form action="" method="post" class="searchForm">
-                <input type="text" class="form-control" name="search" placeholder="search for products">
-                    <button type="submit" class="searchbtn btn btn-default">search</button>
-              
-                {{csrf_field()}}
-
-        </form>
+    {{$products->links()}}
+ 
+ @endif
  </div>
+ <form action="" method="post" class="searchForm">
+    <input type="text" class="form-control" name="search" placeholder="search for products">
+        <button type="submit" class="searchbtn btn btn-default">search</button>
+  
+    {{csrf_field()}}
+
+</form>
+
+
+
+
  <div class="container col-md-9 ">
         
     {{--  All Products view  --}}
@@ -161,14 +166,32 @@
 
         <div class="panel-footer">
                 {{$product->formatPrice()}} <span>
-                    <a href="" class="btn btn-success"> Add to cart</a>
+
+                            {{--  hidden fields  --}}
+                    <form action="{{route('shop.cart')}}" method="post">
+                            <input type="hidden" name="id" value="{{$product->id}}">
+                            <input type="hidden" name="name" value="{{$product->title}}">
+                            <input type="hidden" name="price" value="{{$product->price}}">
+                            <button type="submit" class="btn btn-success">Add to cart</button>
+                        
+                            {{csrf_field()}}
+                            
+                        </form>
+    
                 </span>
         </div>
+
+
     </div>
        
     @endforeach
     
-    {{ $products->links() }}
+    @if($products instanceof \Illuminate\Pagination\LengthAwarePaginator )
+
+   {{$products->links()}}
+
+@endif
+    
 </div>
 
 @endsection
