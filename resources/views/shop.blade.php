@@ -10,6 +10,8 @@
       VAXON SHOP 
   </h1>  --}}
   <img src="{{asset('images/vaxon6.png')}}" class="img-responsive vaxon" alt="">
+  <img src="{{asset('images/shoe.png')}}"  class="img-responsive shoe" alt="">
+  
   <img src="{{asset('images/shopping_bag.png')}}"  class="img-responsive bag" alt="">
   
 

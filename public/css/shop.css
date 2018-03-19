@@ -98,11 +98,12 @@ body {
     position: relative;
     left: 35%;
     animation: bag 3s cubic-bezier(.18, .89, .32, 1.28);
-    animation-delay: 2s;
     animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
 }
 
-@keyframes bag {
+
+/* @keyframes bag {
     0% {
         transform: translateY(10px);
         transform: scale(0.2);
@@ -150,7 +151,113 @@ body {
     }
     100% {
         transform: scale(1.2);
-        transform: translateY(100px);
+        transform: translateY(1000px);
+    }
+} */
+
+@keyframes bag {
+    0% {
+        transform: translateY(10px);
+        transform: scale(0.2);
+        transform: translateX(1000px);
+    }
+    10% {
+        transform: scale(1.2);
+        transform: translateX(1000px);
+        transition: all 8s cubic-bezier(.18, .89, .32, 1.28) 4s;
+    }
+    20% {
+        transform: scale(0.2);
+        transform: translateY(0px);
+        transition: all 8s cubic-bezier(.18, .89, .32, 1.28) 10s;
+    }
+    30% {
+        transform: scale(1.2);
+        transform: skewX(56deg);
+        transform: translateY(-40px)rotateZ(20deg);
+    }
+    40% {
+        transform: scale(0.1);
+        transform: translateY(10px);
+        transform: skewX(0deg);
+    }
+    50% {
+        transform: scale(0.1);
+        transform: translateY(-40px);
+        transform: skewY(0deg);
+    }
+    60% {
+        transform: scale(1.2);
+        transform: translateY(0px);
+        transform: translateX(400px);
+    }
+    70% {
+        transform: scale(1.2);
+        transform: translateY(0px);
+        transform: skewY(0deg);
+        transform: translateX(-900px);
+    }
+    80% {
+        transform: scale(1.2);
+        transform: translateY(0px);
+        transform: rotate(0deg);
+        transform: translateX(-2100px);
+    }
+    90% {
+        transform: scale(1.2);
+        transform: translateY(0px);
+        transform: translateX(-2100px);
+    }
+    100% {
+        transform: scale(1.2);
+        transform: translateX(-2000px);
+    }
+}
+
+.img-responsive.shoe {
+    width: 200px;
+    position: absolute;
+    left: 35%;
+    top: 17%;
+    animation: shoe 2.5s cubic-bezier(.18, .89, .32, 1.28);
+    animation: shoe 3s cubic-bezier(0, 1.31, .77, .58);
+    animation: shoe 3s cubic-bezier(.39, -0.67, .77, .58);
+    animation: shoe 3s cubic-bezier(1, -0.48, .77, .58);
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+}
+
+@keyframes shoe {
+    0% {
+        transform: rotate(0deg);
+        transform: translateY(0px);
+        transform: scale(1);
+        opacity: 1;
+    }
+    20% {
+        transform: rotate(40deg);
+        transform: translateY(300px);
+        opacity: 0;
+    }
+    40% {
+        transform: rotate(40deg);
+        transform: translateY(400px);
+        opacity: 0;
+    }
+    60% {
+        transform: rotate(40deg);
+        transform: translateY(400px);
+        transform: scale(.1);
+        opacity: 0;
+    }
+    80% {
+        transform: rotate(40deg);
+        transform: scale(.1);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(40deg);
+        opacity: 1;
     }
 }
 
