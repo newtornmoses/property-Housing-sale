@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -17,9 +18,9 @@ class ProductController extends Controller
     {
       $products =  Product::orderBy('title','asc')
                     ->paginate();
-
-
-       return view('shop')->with('products',$products);
+ 
+   
+       return view('shop')->with(['products'=>$products]);
     }
 
     /**
@@ -73,20 +74,27 @@ class ProductController extends Controller
         $mightAlsoLike =  Product::where('slug','!=', $slug)
                              ->inRandomOrder()
                              ->take(6)->get();
- 
-        return view('product')->with(['product'=> $product, 'mightAlsoLike' => $mightAlsoLike]);
+
+ $cat = Category::all();
+   
+        return view('product')->with(['product'=> $product, 
+        'mightAlsoLike' => $mightAlsoLike]);
     }
 
 
-
+//get items by price
     public function getbyPrice(Request $request)
     {
-       $price1 = $request->input('from');
-       $price2 = $request->input('to');
+       $price1 = $request->query('from');
+       $price2 = $request->query('to');
+     
        
    $products = Product::where('price', '>=', $price1)
                     ->where('price', '<=', $price2 )
+                    ->orderBy('price','asc')
                     ->paginate();
+
+                    //  return $products;
                     session()->flash('price1' ,$price1 );
                     session()->flash('price2' ,$price2 );
                     
@@ -115,7 +123,7 @@ class ProductController extends Controller
         $price2 =100;
    $products = Product::where('price', '>=', $price1)
                     ->where('price', '<=', $price2 )
-                    ->orderBy('title', 'asc')
+                    ->orderBy('price', 'asc')
                     ->paginate();
    return   view('shop')->with('products', $products);
     }
@@ -127,7 +135,7 @@ class ProductController extends Controller
         $price2 =200;
    $products = Product::where('price', '>=', $price1)
                     ->where('price', '<=', $price2 )
-                    ->orderBy('title', 'asc')
+                    ->orderBy('price', 'asc')
                     ->paginate();
    return   view('shop')->with('products', $products);
     }
@@ -140,10 +148,12 @@ class ProductController extends Controller
         $price2 =500;
    $products = Product::where('price', '>=', $price1)
                     ->where('price', '<=', $price2 )
-                    ->orderBy('title', 'asc')
+                    ->orderBy('price', 'asc')
                     ->paginate();
    return   view('shop')->with('products', $products);
     }
+
+
 
     //getcart
 
@@ -196,6 +206,40 @@ class ProductController extends Controller
         Cart::remove($id);
         session()->flash('success', 'youve successfully deleted the item');
         return redirect()->back();
+    }
+
+    // save for later
+    public function saveForLater($id)
+    {
+        $item = Cart::get($id);
+        Cart::remove($id);
+        Cart::instance('saveForLater')->add($item->id, $item->name,1, $item->price)
+                    ->associate('App\Product');
+                    return redirect()->back();
+    }
+
+
+
+    // send to cart
+    public function sendTocart($id)
+    {
+        $item = Cart::instance('saveForLater')->get($id);
+
+         Cart::instance('saveForLater')->remove($id);
+
+         Cart::instance('default')->add($item->id, $item->name, 1,$item->price)
+             ->associate('App\Product');
+
+             return redirect()->back();
+       
+    }
+
+
+    // RemovesaveForLater
+    public function RemovesaveForLater($id)
+    {
+       Cart::instance('saveForLater')->remove($id);
+       return redirect()->back();
     }
 
     /**

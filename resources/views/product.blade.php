@@ -18,7 +18,9 @@
         </div>
 
         <div class="panel-body productImage">
-             <img src="{{asset('images/'.$product->image)}}"  class="img-responsive" alt="{{$product->image}}">
+             <img src="{{asset('images/'.$product->image)}}"  id="zoom_01"  class="img-responsive " 
+           data-zoom-image="{{asset('images/'.$product->image)}}"
+             alt="{{$product->image}}"/>
 
         </div>
 
@@ -79,4 +81,6 @@
 </div>
 
 @endsection
+
+
 

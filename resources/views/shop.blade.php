@@ -6,9 +6,13 @@
 @section('content')
 {{--  banner  --}}
 <section class="banner">
-  <h1 class="text-center heading">
+  {{--  <h1 class="text-center heading">
       VAXON SHOP 
-  </h1>
+  </h1>  --}}
+  <img src="{{asset('images/vaxon6.png')}}" class="img-responsive vaxon" alt="">
+  <img src="{{asset('images/shopping_bag.png')}}"  class="img-responsive bag" alt="">
+  
+
   <p class="headingFollow">A Mile away from happiness</p>
 </section>
  
@@ -22,36 +26,138 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                <h4 class="text-center">Categories</h4>
+
+              
             </div>
             <div class="panel-body">
                 <ul class="list-group">
-                    <li class="list-group-item">
+                    <li class="list-group-item outer">
+                            <a href="{{route('category.electronics' , 'electrical accessories')}}">
                         Electrical Accessories  <i class="fa fa-television pull-right"></i>
+                            </a >
+
+                            <ul class="inner">
+                                    <li class="list-group-item innerli innerDeep">laptops & desktops
+                                            <ul class="ulnner">
+                                                    <li class="list-group-item innerInner"> Accer </li> 
+                                                    <li class="list-group-item innerInner">Dell</li>
+                                                    <li class="list-group-item innerInner">Toshiba</li>
+                                                    <li class="list-group-item innerInner">Sony</li>
+                                                    <li class="list-group-item innerInner">Mac book</li>
+                                                    <li class="list-group-item innerInner">I-Mac</li>
+                                                    <li class="list-group-item innerInner">Lenovo</li>
+                                               
+                                                </ul>
+
+                                    </li>
+                                    <li class="list-group-item innerli innerDeep">Home Accessories
+                                            <ul class="ulnner">
+                                                    <li class="list-group-item innerInner"> LCD & LED Tvs </li> 
+                                                    <li class="list-group-item innerInner">Fridges</li>
+                                                    <li class="list-group-item innerInner">others</li>
+
+                                                </ul>
+                                    </li>
+                                    
+                                </ul>
                     </li>
 
-                      <li class="list-group-item">
+                      <li class="list-group-item outer">
+                            <a href="{{route('category.phones' , 'phone accessories')}}">                          
                             Phone Accessories  <i class="fa fa-phone pull-right"></i>
+                            </a>
+
+                            <ul class="inner">
+                                    <li class="list-group-item innerli">Phones
+                                            <ul class="innerInner">
+                                                    <li class="list-group-item innerInner">I-Phones/ Apple</li>
+                                                    <li class="list-group-item innerInner">Samsung</li>
+                                                    <li class="list-group-item innerInner">Sony</li>
+                                                    <li class="list-group-item innerInner">Htc</li>
+                                                    <li class="list-group-item innerInner">Lg</li>
+                                                    <li class="list-group-item innerInner">others</li>
+                                                   
+                                                </ul>
+                                    </li>
+                                    <li class="list-group-item innerli">Accessories
+                                            </li>
+                                </ul>
                         </li>
 
-                        <li class="list-group-item">
+                        <li class="list-group-item outer">
+                                <a href="{{route('category.video' , 'video & camera')}}">                            
                                Video & Camera  <i class="fa fa-video-camera pull-right"></i>
+                                </a>
+
+                                <ul class="inner">
+                                        <li class="list-group-item innerli">Sonny</li>
+                                        <li class="list-group-item innerli">Panasonic</li>
+                                        <li class="list-group-item innerli">Nikon</li>
+                                        <li class="list-group-item innerli">Cannon</li>
+                                        <li class="list-group-item innerli">Others</li>
+                                      
+                                    </ul>
                             </li>
 
-                        <li class="list-group-item">
+                        <li class="list-group-item outer">
+                                <a href="{{route('category.men' , 'men ware')}}">                            
                                 Men Ware   <i class="fa fa-male pull-right"></i>
+                                </a>
+
+                                <ul class="inner">
+                                    <li class="list-group-item innerli">T-shirts</li>
+                                    <li class="list-group-item innerli">Pants</li>
+                                    <li class="list-group-item innerli">Shorts</li>
+                                    <li class="list-group-item innerli">Trousers</li>
+                                    <li class="list-group-item innerli">Suites</li>                                    
+                                    <li class="list-group-item innerli">Watches</li>
+                                    <li class="list-group-item innerli">Caps</li>
+                                    <li class="list-group-item innerli">Shoes</li>
+                                </ul>
                             </li>
 
-                            <li class="list-group-item">
-                                    Women Ware  <i class="fa fa-female pull-right"></i>
+                            <li class="list-group-item outer">
+                                <a href="{{route('category.women' , 'women ware')}}">                                
+                                        Women Ware  <i class="fa fa-female pull-right"></i>
+                                </a>
+
+                                <ul class="inner">
+                                        <li class="list-group-item innerli">T-shirts</li>
+                                        <li class="list-group-item innerli">Pants</li>
+                                        <li class="list-group-item innerli">Trousers</li>
+                                        <li class="list-group-item innerli">Watches</li>
+                                        <li class="list-group-item innerli">Shoes</li>
+                                    </ul>
                                 </li>
 
-                                <li class="list-group-item">
-                                        Kids Ware   <i class="fa fa-child pull-right"></i>
-                                    </li>
+                                <li class="list-group-item outer">
+                                        <a href="{{route('category.kids' , 'kids ware')}}">                                   
+                                                    Kids Ware   <i class="fa fa-child pull-right"></i>
+                                        </a>
+                                    <ul class="inner">
+                                            <li class="list-group-item innerli">T-shirts</li>
+                                            <li class="list-group-item innerli">Pants</li>
+                                            <li class="list-group-item innerli">Shorts</li>
+                                            <li class="list-group-item innerli">Suites</li>
+                        
+                                            <li class="list-group-item innerli">dresses</li>
+                                            <li class="list-group-item innerli">Shoes</li>
+                                        </ul>
+                                </li>
 
-                                    <li class="list-group-item">
-                                            Toys    <i class="fa fa-gamepad pull-right"></i>
-                                        </li>
+
+                            <li class="list-group-item outer">
+                                <a href="{{route('category.toys' , 'toys')}}">                                        
+                                                Toys    <i class="fa fa-gamepad pull-right"></i>
+                                </a>
+
+                                    <ul class="inner">
+                                            <li class="list-group-item innerli">Kids-Toys</li>
+                                            <li class="list-group-item innerli">Mature Toys</li>
+                                            <li class="list-group-item innerli">Sex Toys</li>
+                                            
+                                        </ul>
+                                </li>
 
                                         
                 </ul>
@@ -72,11 +178,12 @@
                     <h4 class="text-center">Manual Filter</h4>
                     
           
-                    <form action="{{route('product.price')}}" method="post">
+                    <form action="{{route('product.price')}}" method="get">
                         <div class="form-group">
                                 <label for="From">From</label>
                                 <input type="number" name="from" class="form-control" id="from" placeholder="e.g $50" value="{{session('price1')? session('price1'): ''}}" required>
                         </div>
+                        {{--  {{session('price1')? session('price1'): ''}}  --}}
 
                         <div class="form-group">
                                 <label for="To">To</label>
@@ -132,14 +239,21 @@
 
 {{--  search pannel  --}}
  <div class="col-md-8 productsSearch">
+    
+    
     @if($products instanceof \Illuminate\Pagination\LengthAwarePaginator )
 
-    {{$products->links()}}
+    {{$products->appends([
+        'to'=> session('price2')? session('price2'): '',
+        'from'=> session('price1')? session('price1'): '',
+        'search'=>session('search')
+        
+    ])->links()}}
  
  @endif
  </div>
- <form action="" method="post" class="searchForm">
-    <input type="text" class="form-control" name="search" placeholder="search for products">
+ <form action="{{route('product.search')}}" method="get" class="searchForm">
+    <input type="text" class="form-control" name="search"  value="{{old('search')}}" placeholder="search for products">
         <button type="submit" class="searchbtn btn btn-default">search</button>
   
     {{csrf_field()}}
@@ -150,7 +264,7 @@
 
 
  <div class="container col-md-9 ">
-        
+       
     {{--  All Products view  --}}
     @foreach($products as $product)
     <div class="panel panel-default col-md-4 shop">
@@ -186,11 +300,18 @@
        
     @endforeach
     
+   
+
     @if($products instanceof \Illuminate\Pagination\LengthAwarePaginator )
 
-   {{$products->links()}}
+    {{$products->appends([
+        'to'=> session('price2')? session('price2'): '',
+        'from'=> session('price1')? session('price1'): '',
+        'search'=>session('search')
+        
+    ])->links()}}
+    @endif
 
-@endif
     
 </div>
 

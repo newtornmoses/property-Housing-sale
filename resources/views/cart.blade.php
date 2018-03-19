@@ -39,7 +39,7 @@
                   <td>{{$item->model->title}}</td>                  
                     <td>{{$item->model->formatPrice()}}</td>
                   <td>{{$item->qty}}</td>
-                  <td>{{tax($item->tax)}}</td>
+                  <td>{{$item->tax}}</td>
                     <td>{{cartPrice($item->subtotal)}}</td>
                         <td>
                            
@@ -86,6 +86,14 @@
                         </form>
                         </div>
 
+                        <form action="{{route('shop.saveForLater', $item->rowId)}}" method="post">
+
+                          <button type="submit" class="saveForLater">saveForLater</button>
+
+                          {{csrf_field()}}
+                          
+                  </form>
+                       
                         </td>
 
                   
@@ -102,7 +110,9 @@
   <hr>
 
   <div class="total">
+      <a href="{{route('product.checkout')}}" class="btn btn-success checkout pull-right">Check Out</a>
       <h4 class="pull-right totalPrice"> TOTAL = {{ cartDollar(Cart::total())}} </h4>
+     
   </div>
 
   @else
@@ -114,6 +124,66 @@
     
 
   
+</div>
+
+
+<div class="saveForLater col-md-10 col-md-offset-1">
+<h4 class="text-center">
+  @if (Cart::instance('saveForLater')->count()>0)
+        <span class="badge">{{Cart::instance('saveForLater')->count()}}</span> <u> ITEMS SAVED FOR LATER</u>
+  @endif
+      
+</h4>
+@foreach (Cart::instance('saveForLater')->content() as $item)
+    
+
+<div class="well savedForLaterView">
+<div class="image">
+    <img src="{{asset('images/'.$item->model->image)}}" width="100px" 
+    height="auto"  class="img-responsive" alt="">
+  </div>
+
+  <div class="carttitle">
+  <h4>Title: </h4>
+  <p>{{$item->model->title}}</p>
+</div>
+  
+
+<div class="cartprice">
+ <h4>Price: </h4> <p>{{cartPrice($item->price)}} </p>
+ </div>
+
+ <div class="qty">
+    <h4>Qty:  </h4> <p>{{$item->qty}}</p> 
+    </div>
+
+
+ <div class="sendTocart">
+ <form action="{{route('shop.sendTocart', $item->rowId)}}" method="post">
+
+    <button type="submit" class="saveForLater">Send To Cart</button>
+
+    {{csrf_field()}}
+    
+</form>
+
+</div>
+
+<div class="sendTocart">
+    <form action="{{route('shop.RemovesaveForLater', $item->rowId)}}" method="post">
+   
+       <button type="submit" class="saveForLater">remove</button>
+   
+       {{csrf_field()}}
+       
+   </form>
+   
+   </div>
+
+ 
+</div>
+@endforeach
+
 </div>
 
 

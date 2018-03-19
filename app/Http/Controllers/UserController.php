@@ -1,127 +1,84 @@
 <?php
- namespace  App\Http\Controllers;
 
-        use Illuminate\Http\Request;
-        use App\User;
-        use  App\Post;
-        use Auth;
-        class UserController extends Controller
-        {
+namespace App\Http\Controllers;
 
-      
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-            /** 
-             * 
-             *
-             *
-             * @Get all users
-             * @return allusers
-             */
-            public function getUsers()
-            {
-                $users = User::all();
-                
-                return view('home')->with('users', $users);
-            
-            }
-                    //get signup Form
-            public function index()
-            {
-                    return view('signup');
-            }
+class UserController extends Controller
+{
+    //   get signup form
+    public function getSignup()
+    {
+        return view('users/signup');
+    }
 
-        // get userProfile
-        public function Userprofile()
-            {
-                $userArray = array();
-                $user = Auth::user()->posts;
-                foreach(  $user as $post):
-                array_push($userArray, $post);
-                endforeach;
+    //   get signup form
+    public function getLogin()
+    {
+        return view('users/login');
+    }
 
-                // sort the array
-              usort($userArray, function ($a, $b ) {
-                  return $a->id < $b->id;
-                });
-           
-               
-                return view('Userprofile')->with('posts', $userArray);
-            }
 
-            //get userprofile by id
 
-            public function UserprofileId($id)
-            {
-                $userArray =array();
-            $userbyId = User::find($id)->posts;
-          foreach ($userbyId as $user):
-             array_push($userArray, $user);
-          endforeach;
+    //profile
 
-            usort($userArray, function($a, $b){
-                return $a->id < $b->id;
-            });
+    public function profile($slug)
+    {   $id = Auth::user()->slug;
+        $user = User::where('slug',$slug)
+                     ->first();
 
-            return view('UserprofileId')->with('posts', $userArray);
+        return view('users/profile')->with('user' ,$user);
+    }
+
+    //signup
+    public function signup(Request $request)
+    {
+        $this->validate($request, [
+        'name' =>'required|min:4|max:225',
+        'email'=> 'required|email|unique:users',
+        'password'=>'required| min:6'
+        ]);
+
+        $name = $request->input('name');
+      $user =  User::create([
+            'name'      =>    $name,
+            'slug'      =>    str_slug($name),
+            'email'     =>    $request->input('email'),
+            'password'  => bcrypt($request->input('password'))
+        ]);
+
+            if($user){
+                Auth::login($user);
+                return view('users/profile')->with('success', 'successfully added as a new user');
             }
 
-
-        //store Users
-        public function registerUser(Request $request)
-        {
-            $this->validate($request, [
-                'name' => 'required| min:4',
-                'email'=> 'required| email|unique:Users',
-                'password' => 'required| min:6'
-            ]);
-
-            $newUser = new User();
-            $newUser->name = $request->input('name');
-            $newUser->email = $request->input('email');
-            $newUser->password = bcrypt($request->input('password'));
-            $newUser->profile_image = $request->input('profile_image');
-            
-            
-
-            $newUser->save();
-            Auth::login($newUser);
-            return redirect('/');
-            
-        }
+    }
 
 
-        //get userlogin Form
-        public function getlogin()
-        {
-            return view('login');
-            
-        }
+    // login
 
-        //login user
-        public function login(Request $request)
-        {
-            $this->validate($request, [
-                'email' => 'required|email',
-                'password'=> 'required|min:6'
-            ]);
-        
-            if(Auth::attempt(['email' => $request->input('email'), 'password' =>$request->input('password')]))
-            {
-            return redirect('/')->with('success', 'successfully logged in');
-            }
-            $danger ='please check your credentials';
-            return redirect()->back()->with(['danger'=> $danger]);
-            
-        }
-        
+    public function login(Request $request)
+    {   $this->validate($request, [
+        'email' => 'required|email',
+        'password'=> 'required'
+    ]);
 
-        //log out user
-        public function logout()
-        {  
-            Auth::logout();
-            
-            return view('login');
-        }
+    if(Auth::attempt(['email' => $request->input('email'), 'password' =>$request->input('password')]))
+    {
+    return redirect('/');
+    }
+    $danger ='please check your credentials';
+    return redirect()->back()->with(['danger'=> $danger]);
+    }
 
 
-        }
+    // logout
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('shop.home')->with('success','youve successfully logged out');
+    }
+}

@@ -13,3 +13,15 @@ document.addEventListener('scroll', (event) => {
 
     }
 });
+
+
+// .classList.toggle('showInner');
+// open list items on ul click 
+var ul = document.querySelectorAll('.outer');
+var innerDeep = document.querySelectorAll('.innerDeep');
+for (let i = 0; i < ul.length; i++) {
+    ul[i].addEventListener('click', function() {
+
+        this.children[1].classList.toggle('showInner');
+    })
+}
