@@ -1,80 +1,76 @@
-<div class="col-md-12 footer">
- <div class="col-md-4"> 
-<h4 class="category">Categories</h4>
-<ul class="list-group">
- 
-                <li class="list-group-itemfooterSection">
-                        <a href="{{route('category.electronics' , 'electrical accessories')}}">
-                                <i class="fa fa-television "></i> Electrical Accessories  
-                        </a >
-                </li>
-
-                <li class="list-group-itemfooterSection">
-                        <a href="{{route('category.phones' , 'phone accessories')}}">                          
-                                <i class="fa fa-phone "></i>  Phone Accessories  
-                        </a>
-                </li>
-
-                <li class="list-group-itemfooterSection">
-                        <a href="{{route('category.video' , 'video & camera')}}">                            
-                                <i class="fa fa-video-camera "></i> Video & Camera 
-                        </a>
-                </li>
-
-                <li class="list-group-itemfooterSection">
-                        <a href="{{route('category.men' , 'men ware')}}">                            
-                                <i class="fa fa-male "></i>  Men Ware   
-                        </a>
-                </li>
-
-                <li class="list-group-itemfooterSection">
-                        <a href="{{route('category.women' , 'women ware')}}">                                
-                                <i class="fa fa-female "></i>  Women Ware 
-                        </a>
-                </li>
-
-                <li class="list-group-itemfooterSection">
-                        <a href="{{route('category.kids' , 'kids ware')}}">                                   
-                                <i class="fa fa-child "></i>     Kids Ware  
-                        </a>
-                </li>
 
 
-                <li class="list-group-itemfooterSection">
-                        <a href="{{route('category.toys' , 'toys')}}">                                        
-                                <i class="fa fa-gamepad "></i>  Toys    
-                        </a>
-                </li>
+<div class="col-md-12 col-sm-12 col-xs-12 footer">
+                <div class="FooteruserManagement col-md-4   col-sm-12">
+                                <h4>PROPERTY MASTERS</h4>
+                             
+                        <ul class="footerLink ">
+                               <li>
+                                <a href="{{route('property.home')}}"><i class="fa fa-home"></i> Home</a>
+                               </li>
+
+                                @if (Auth::check())
+                                <a href="{{route('user.message', Auth::id())}}" >
+                                    @if(count(Auth::user()->unread())>0)
+                                    <li>
+                                    <i class="fa fa-envelope">  Inbox<p class="unreadMsg text-danger"> {{count(Auth::user()->unread())}}</p></i>
+                                    </li>
+                                    @else
+                                      <li>
+                                    <i class="fa fa-envelope">  Inbox<p class="unreadMsg"></p></i>
+                                </li>
+                                    @endif
+                               
+                                </a>
+                                
+                                <li>
+                                                <a href="{{route('user.logout')}}" > <i class="fa fa-key"></i>Logout</a> 
   
-</ul>
-</div>  
+                                </li>
 
-<div class="col-md-4 socialLinks">
-        <h4>Download our app on App Store</h4>
-        <img src="{{asset('images/logo.png')}}" class="img-responsive vaxonApp" alt="">
+                                <li>
+                                                <a href="{{route('user.profile', Auth::user()->slug)}}"> <i class="fa fa-user-circle-o"></i>Profile</a> 
+
+                                </li>
+                                
+                                @else
+
+                                <li>
+                                                <a href="{{route('login')}}" > <i class="fa fa-key"></i> Login</a>
+
+                                </li>
+                                
+                                <li>
+                                                <a href="{{route('user.getSignup')}}" ><i class="fa fa-edit"></i> signup</a>
+
+                                </li>
+                                @endif
+                        </ul>
+                            </div>
+                          
+
+  <div  >             
+
+<emailus-component></emailus-component>
+
+</div> 
+
+
+
+
+
+
+<div class="col-md-12  col-sm-12 rights mt-4">
+                <p class="rights ">
+                                &copy; copyright , Property Masters ,All rights reserved 2017
+                            </p>
+                        
+                        
+                            <p class="rights pull-right">
+                                Developed by newtorn moses
+                            </p>
 </div>
 
-<div class="col-md-4 weeklyUpdates">
-    <h4>Subscribe to our Weekly Updates</h4>
-    <form action="" method="post">
-        <div class="form-group">
-        <label for="email">Email</label>
-         <input type="text" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block subscribe">Subcribe</button>
 
-    </form>
-</div>
-
-</div>
-<div class="col-md-12 copyright">
-        <p class="rights pull-left">
-            &copy; copyright , Vaxon Group Of Companies ,All rights reserved 2017
-        </p>
-    
-    
-        <p class="rights pull-right">
-            Developed by newtorn moses
-        </p>
-    
     </div>
+

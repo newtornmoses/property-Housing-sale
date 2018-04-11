@@ -3,82 +3,119 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    //   get signup form
-    public function getSignup()
+
+public function getSignup()
+{
+    return view('users/signup');
+}
+
+
+//get login page
+public function getLogin()
+{
+    return view('users.login');
+}
+
+
+//show
+
+public function profile($id)
+
+{
+     $user = User::where('users.slug', $id)->first();
+    $property_id = Auth::user()->properties->first()->user_id;
+
+         
+    
+             
+    return view('users.profile')->with(['user'=> $user, 'property_id'=>$property_id]);
+       
+}
+
+// json profile data
+public function jsonprofile($slug)
+
+{
+     $user = User::where('users.id', $slug)
+     
+     ->first()->properties;
+    
+    
+
+        return response()->json($user);
+}
+
+public function getUsers()
+{
+    $users =User::take(4).get();
+    return view('view')->with('users', $users);
+}
+
+
+
+
+//login
+public function login(Request $request)
+{       
+    $this->validate($request,[
+        'email'=> 'required|email',
+        'password'=>'required'
+    ]);
+    
+    $email= $request->input('email');
+            $password =$request->input('password');
+            $user= Auth::attempt([ 'email'=> $email, 'password'=>$password]);
+    if( $user)
     {
-        return view('users/signup');
+           
+   return redirect()->route('user.profile' , Auth::user()->slug);
+   
     }
-
-    //   get signup form
-    public function getLogin()
-    {
-        return view('users/login');
+    else{
+            
+        
+        $message = 'please check your email or password';
+       
+       $request->session()->flash('danger', $message);
+       
+        return redirect()->back();
     }
+}
 
 
-
-    //profile
-
-    public function profile($slug)
-    {   $id = Auth::user()->slug;
-        $user = User::where('slug',$slug)
-                     ->first();
-
-        return view('users/profile')->with('user' ,$user);
-    }
-
-    //signup
+//signup
     public function signup(Request $request)
     {
-        $this->validate($request, [
-        'name' =>'required|min:4|max:225',
-        'email'=> 'required|email|unique:users',
-        'password'=>'required| min:6'
+        $this->validate($request,[
+                'name'=> 'required',
+                'email' =>'required|unique:users',
+                'password' => 'required',
+                'country' => 'required'
         ]);
 
-        $name = $request->input('name');
-      $user =  User::create([
-            'name'      =>    $name,
-            'slug'      =>    str_slug($name),
-            'email'     =>    $request->input('email'),
-            'password'  => bcrypt($request->input('password'))
+              $name = $request->name;
+        $users = User::create([
+            'name'=>$name,
+            'email' =>$request->email,
+            'password'=>bcrypt($request->password),
+            'slug' =>str_slug($name, '-'),
+            'contact_detail'=> $request->code.$request->phone_number,
+            'country' => $request->country
         ]);
 
-            if($user){
-                Auth::login($user);
-                return view('users/profile')->with('success', 'successfully added as a new user');
-            }
-
+        return redirect()->route('property.home');
     }
 
-
-    // login
-
-    public function login(Request $request)
-    {   $this->validate($request, [
-        'email' => 'required|email',
-        'password'=> 'required'
-    ]);
-
-    if(Auth::attempt(['email' => $request->input('email'), 'password' =>$request->input('password')]))
-    {
-    return redirect('/');
-    }
-    $danger ='please check your credentials';
-    return redirect()->back()->with(['danger'=> $danger]);
-    }
-
-
-    // logout
-
+    //logout
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('shop.home')->with('success','youve successfully logged out');
+        return redirect()->route('property.home');
     }
 }

@@ -21,4 +21,14 @@
     
 @endif
 
+
+@if (Session::has('danger'))
+<div class="col-md-4 col-md-offset-4">
+    <div class="alert alert-danger">
+         {{Session::get('danger')}}
+    </div>
+</div>
+    
+@endif
+
 </div>

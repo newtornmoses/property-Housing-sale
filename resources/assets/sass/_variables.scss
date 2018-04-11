@@ -1,38 +1,132 @@
-
 // Body
-$body-bg: #f5f8fa;
-
+// $body-bg: #f5f8fa;
 // Borders
-$laravel-border-color: darken($body-bg, 10%);
+$laravel-border-color: darken(white, 10%);
 $list-group-border: $laravel-border-color;
 $navbar-default-border: $laravel-border-color;
 $panel-default-border: $laravel-border-color;
 $panel-inner-border: $laravel-border-color;
-
 // Brands
 $brand-primary: #3097D1;
 $brand-info: #8eb4cb;
 $brand-success: #2ab27b;
 $brand-warning: #cbb956;
 $brand-danger: #bf5329;
-
 // Typography
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$font-family-sans-serif: "Raleway", sans-serif;
+$font-family-sans-serif: "Raleway",
+sans-serif;
 $font-size-base: 14px;
 $line-height-base: 1.6;
 $text-color: #636b6f;
-
 // Navbar
 $navbar-default-bg: #fff;
-
 // Buttons
 $btn-default-color: $text-color;
-
 // Inputs
 $input-border: lighten($text-color, 40%);
 $input-border-focus: lighten($brand-primary, 25%);
 $input-color-placeholder: lighten($text-color, 30%);
-
 // Panels
 $panel-default-heading-bg: #fff;
+.col-md-12.col-sm-12.col-xs-12.panel-default {
+    background: #1f1e1e;
+    margin-top: -3px;
+}
+
+.Page.navigation {
+    margin-left: 0px;
+    background: #332f2f;
+    height: 113px;
+    line-height: -moz-block-height;
+    border-top: 1px solid #fff6;
+    border-bottom: 1px solid #dbdddf;
+}
+
+.searchPannel>.form-group {
+    margin-left: 72px;
+}
+
+.pagination.col-md-3 {
+    margin-top: -10px;
+}
+
+.text-white.totalItems {
+    margin-top: -4px;
+    background: #3f342f;
+    width: -moz-fit-content;
+    padding: 6px;
+    border: 1px solid #f0f8ff4d;
+    border-radius: 4px;
+}
+
+.searchPannel {
+    height: 56%;
+    display: -webkit-inline-box;
+    width: 100%;
+    border-radius: 5px;
+    color: white;
+    border: 1px solid #f0f8ff33;
+}
+
+.emptyResponse.col-md-4 {
+    background: tomato;
+    height: 250px;
+    animation: empty 0.6s cubic-bezier(.41, 1.7, 0, 1.56) infinite;
+}
+
+@keyframes empty {
+    0% {
+        transform: rotateY(16deg) translateY(-35px);
+        margin-top: 48px;
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg) translateY(140px);
+        margin: 48px;
+    }
+}
+
+.fa.fa-road.fa-5x {
+    left: 133px;
+    position: relative;
+    transform: scale(2.3);
+    top: 91px;
+}
+
+.text-empty {
+    color: white;
+    font-size: 29px;
+    text-align: center;
+    background: #de26054d;
+}
+
+.emptyResponse.col-md-4 {
+    background: url('/public/404/404.jpg');
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto auto;
+    height: 300px;
+    animation: empty 1.6s cubic-bezier(0, 1.71, .31, -0.24) infinite;
+    background-size: 344px 334px;
+    background-position: right;
+    width: 369px;
+}
+
+.pagination.footer.col-md-12 {
+    height: 78px;
+    background: #2d2c2c;
+    margin-top: 0px;
+    border-radius: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    border-top: none;
+}
+
+.pagination.footer {
+    margin-left: 25%;
+    margin-top: 32px;
+    background: none;
+}

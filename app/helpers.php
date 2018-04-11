@@ -1,19 +1,8 @@
 <?php
 
- function cartPrice($price)
+
+
+function priceConfig($price)
 {
-   return '$'.$price.'.00';
-}
-
-
-
-
-function cartDollar($price)
-{
-   return '$'.$price;
-}
-
-function tax($price)
-{
-    return $price.'%';
+    return '$'.($price/1000).'K';
 }

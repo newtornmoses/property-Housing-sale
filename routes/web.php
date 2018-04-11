@@ -11,60 +11,44 @@
 |
 */
 
-Route::get('/', 'ProductController@index')->name('shop.home') ;
-Route::get('/filter', 'ProductController@getbyPrice')->name('product.price');
+Route::get('/', 'PropertyController@index')->name('property.home') ;
+Route::get('/properties', 'PropertyController@getProperties')->name('property.fetch') ;
+
+//email
+Route::post('/emailSubscription', 'EmailController@store')->name('user.subscrption');
+
+Route::get('/property/{property_slug}', 'PropertyController@show')->name('property.view');
+Route::get('/property/single_property/{id}', 'PropertyController@showJson')->name('property.viewid');
+
+Route::post('/property/upload', 'PropertyController@store')->name('property.store');
+Route::post('/property/upload/php', 'PropertyController@store2')->name('property.store2');
+
+Route::post('/property/update/{id}', 'PropertyController@update')->name('property.update');
+Route::post('/property/delete/{id}', 'PropertyController@destroy')->name('property.delete');
+
+Route::get('/user/fetch/{id}', 'MessageController@index')->name('user.fetch');
+Route::get('/user/message/{property_slug}/uploader', 'MessageController@create')->name('user.message')->middleware('auth');
+
+
+Route::post('/user/message/{id}', 'MessageController@store')->name('user.messageSend');
+Route::put('/user/message/delete/{id}', 'MessageController@delete')->name('user.messageDelete');
+Route::patch('/user/message/update/{id}', 'MessageController@update')->name('user.editMessage');
+  
 
 
 
-Route::get('/cart', 'ProductController@getcart')->name('shop.getcart');
-Route::post('/cart', 'ProductController@addTocart')->name('shop.cart');
-Route::delete('/cart/delete/{id}', 'ProductController@removeCart')->name('shop.delete');
-Route::post('/cartDecrease', 'ProductController@removeOnecart')->name('shop.cartDecrease');
-Route::post('/saveForLater/{id}', 'ProductController@saveForLater')->name('shop.saveForLater');
-Route::post('/sendTocart/{id}', 'ProductController@sendTocart')->name('shop.sendTocart');
-Route::post('RemovesaveForLater/{id}', 'ProductController@RemovesaveForLater')->name('shop.RemovesaveForLater');
 
 
-Route::get('/sort/fixedPrice', 'ProductController@getbyFixedPrice')->name('product.priceFixed') ;
-Route::get('/sort/fixedPrice2', 'ProductController@getbyFixedPrice2')->name('product.priceFixed2') ;
-Route::get('/sort/fixedPrice3', 'ProductController@getbyFixedPrice3')->name('product.priceFixed3') ;
-Route::get('/sort/fixedPrice4', 'ProductController@getbyFixedPrice4')->name('product.priceFixed4') ;
-
-
-//check out
-Route::get('/checkout', 'CheckoutController@index')->name('product.checkout');
-Route::post('/checkout/post',  'CheckoutController@store')->name('product.checkoutPost'); 
-
-
-//thankyou
-Route::get('/thankyou', 'CheckoutController@thankyou')->name('product.thankyou');
-
-//search
-Route::get('/search/product', 'SearchController@search')->name('product.search');
-Route::get('/cat/men/{cat}', 'CategoryController@catMen')->name('category.men');
-Route::get('/cat/women/{cat}', 'CategoryController@catWomen')->name('category.women');
-Route::get('/cat/electronics/{cat}', 'CategoryController@catElec')->name('category.electronics');
-Route::get('/cat/kids/{cat}', 'CategoryController@catKids')->name('category.kids');
-Route::get('/cat/toys/{cat}', 'CategoryController@catToys')->name('category.toys');
-Route::get('/cat/phones/{cat}', 'CategoryController@catPhone')->name('category.phones');
-Route::get('/cat/video/{cat}', 'CategoryController@catVideo')->name('category.video');
-
-
-//findby slug
-Route::get('/{slug}', 'ProductController@show')->name('product.show');
-
-
+Route::get('/jsonprofile/{slug}', 'UserController@jsonprofile')->name('user.jsonProfile');
 
 Route::group(['prefix'=> 'users'], function(){
     Route::get('/signup', 'UserController@getSignup')->name('user.getSignup');
-    Route::get('/login', 'UserController@getLogin')->name('user.getLogin');
+    Route::get('/login', 'UserController@getLogin')->name('login');
     Route::post('/signup', 'UserController@signup')->name('user.signup');
     Route::post('/login', 'UserController@login')->name('user.login');
     Route::get('/logout', 'UserController@logout')->name('user.logout');
-    Route::get('/profile/{slug}', 'UserController@profile')->name('user.profile');
-    
- 
- 
+    Route::get('/profile/{slug}', 'UserController@profile')->name('user.profile')->middleware('auth');
+
 });
 
 
